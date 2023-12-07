@@ -17,7 +17,7 @@ int randomGuessBruteForce(int pwd, int size)
 {
     // Problem with this approach:
     // the algorithm can guess the same number twice
-    int guess;
+    int guess = rand() % (int)pow(10, size);
     while (guess != pwd)
     {
         guess = rand() % (int)pow(10, size);

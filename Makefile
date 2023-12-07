@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -Iinclude
+CFLAGS = -Wall -Wextra -I$(INCDIR)
 LDFLAGS = -lm
 
 SRCDIR = src
@@ -15,14 +15,14 @@ EXECUTABLE = $(BINDIR)/main
 
 all: $(EXECUTABLE)
 
-$(EXECUTABLE): $(OBJ)
+$(EXECUTABLE): $(OBJ) | $(BINDIR)
 	$(CC) $(CFLAGS) $^ -o $@ $(LDFLAGS)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c | $(OBJDIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-$(OBJDIR):
-	mkdir -p $(OBJDIR)
+$(OBJDIR) $(BINDIR):
+	mkdir -p $@
 
 clean:
 	rm -rf $(OBJDIR) $(BINDIR)
